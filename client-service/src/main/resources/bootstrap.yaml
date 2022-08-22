@@ -4,9 +4,11 @@ spring:
     hibernate.ddl-auto: update
   application:
     name: client-service
-
-server:
-  port: 8081
+  #CONFIGURACION PARA EL CONFIG CLIENT
+  cloud:
+    config:
+      enabled: true
+      uri: http://localhost:8000
 
 eureka:
   client:
