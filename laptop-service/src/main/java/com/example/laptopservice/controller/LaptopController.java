@@ -40,4 +40,9 @@ public class LaptopController {
     public String deleteLaptop(@PathVariable Integer id){
         return laptopService.deleteLaptop(id);
     }
+
+    @GetMapping("/byClient/{id}")
+    public List<Laptop> findByClientId(@PathVariable Integer id){
+        return laptopService.findLaptopByClient(id);
+    }
 }

@@ -21,17 +21,18 @@ public class Laptop {
     private String brand;
     private String model;
     private Double price;
+    private Integer clientId;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        if (!(o instanceof Laptop)) return false;
         Laptop laptop = (Laptop) o;
-        return id != null && Objects.equals(id, laptop.id);
+        return Objects.equals(getId(), laptop.getId()) && Objects.equals(getBrand(), laptop.getBrand()) && Objects.equals(getModel(), laptop.getModel()) && Objects.equals(getPrice(), laptop.getPrice()) && Objects.equals(getClientId(), laptop.getClientId());
     }
 
     @Override
     public int hashCode() {
-        return getClass().hashCode();
+        return Objects.hash(getId(), getBrand(), getModel(), getPrice(), getClientId());
     }
 }

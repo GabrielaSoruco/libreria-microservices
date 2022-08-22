@@ -1,6 +1,7 @@
 package com.example.clientservice.controller;
 
 import com.example.clientservice.entity.Client;
+import com.example.clientservice.model.Laptop;
 import com.example.clientservice.service.ClientService;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,5 +40,15 @@ public class ClientController {
     @DeleteMapping("/deleteClient/{id}")
     public String deleteClient(@PathVariable Integer id){
         return clientService.deleteClientById(id);
+    }
+
+    @PostMapping("/saveLaptop")
+    public Laptop saveLaptopByClient(@RequestBody Laptop laptop){
+        return clientService.saveLaptopByClient(laptop);
+    }
+
+    @GetMapping("/findLaptopsByClient/{id}")
+    public List<Laptop> findLaptopByClient(@PathVariable Integer id){
+        return clientService.findLaptopByClient(id);
     }
 }

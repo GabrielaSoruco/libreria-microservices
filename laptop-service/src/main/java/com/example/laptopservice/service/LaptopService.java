@@ -4,6 +4,7 @@ import com.example.laptopservice.entity.Laptop;
 import com.example.laptopservice.repository.LaptopRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -17,6 +18,7 @@ public class LaptopService {
         this.laptopRepository = laptopRepository;
     }
 
+    // C R U D
     public List<Laptop> findAllLaptop(){
         return laptopRepository.findAll();
     }
@@ -35,6 +37,7 @@ public class LaptopService {
         laptopToUpdate.setBrand(laptop.getBrand());
         laptopToUpdate.setModel(laptop.getModel());
         laptopToUpdate.setPrice(laptop.getPrice());
+        laptopToUpdate.setClientId(laptop.getClientId());
         return laptopRepository.save(laptopToUpdate);
     }
 
@@ -45,5 +48,12 @@ public class LaptopService {
             return "The Laptop has been deleted";
         }
         return "Laptop not found";
+    }
+
+    public List<Laptop> findLaptopByClient(Integer id){
+        if (laptopRepository.findByClientId(id).isPresent()){
+            return laptopRepository.findByClientId(id).get();
+        }
+        return new ArrayList<>();
     }
 }
