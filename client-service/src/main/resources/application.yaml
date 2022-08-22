@@ -1,0 +1,16 @@
+spring:
+  jpa:
+    show-sql: true
+    hibernate.ddl-auto: update
+  application:
+    name: client-service
+
+server:
+  port: 8081
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+      fetch-registry: true
+      register-with-eureka: true
