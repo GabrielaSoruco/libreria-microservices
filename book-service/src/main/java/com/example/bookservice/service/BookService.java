@@ -4,6 +4,7 @@ import com.example.bookservice.entity.Book;
 import com.example.bookservice.repository.BookRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -45,5 +46,12 @@ public class BookService {
             return "The Book has been deleted";
         }
         return "Book not found";
+    }
+
+    public List<Book> findByClientId(Integer id){
+        if (bookRepository.findByClientId(id).isPresent()){
+            return bookRepository.findByClientId(id).get();
+        }
+        return new ArrayList<>();
     }
 }

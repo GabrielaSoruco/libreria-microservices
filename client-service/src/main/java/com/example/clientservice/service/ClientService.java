@@ -1,10 +1,11 @@
 package com.example.clientservice.service;
 
 import com.example.clientservice.entity.Client;
+import com.example.clientservice.feignclients.BookFeignClient;
 import com.example.clientservice.feignclients.LaptopFeignClient;
+import com.example.clientservice.model.Book;
 import com.example.clientservice.model.Laptop;
 import com.example.clientservice.repository.ClientRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -17,9 +18,12 @@ public class ClientService {
     private final ClientRepository clientRepository;
     private final LaptopFeignClient laptopFeignClient;
 
-    public ClientService(ClientRepository clientRepository, LaptopFeignClient laptopFeignClient){
+    private final BookFeignClient bookFeignClient;
+
+    public ClientService(ClientRepository clientRepository, LaptopFeignClient laptopFeignClient, BookFeignClient bookFeignClient){
         this.clientRepository = clientRepository;
         this.laptopFeignClient = laptopFeignClient;
+        this.bookFeignClient = bookFeignClient;
     }
 
     public List<Client> findAllClients(){
@@ -54,12 +58,20 @@ public class ClientService {
         return "Client not found";
     }
 
-    public Laptop saveLaptopByClient(@RequestBody Laptop laptop){
+    public Laptop saveLaptopByClient(Laptop laptop){
         return laptopFeignClient.saveLaptop(laptop);
     }
 
     public List<Laptop> findLaptopByClient(Integer id){
         return laptopFeignClient.findByClientId(id);
+    }
+
+    public Book saveBookByClient(Book book){
+        return bookFeignClient.saveBook(book);
+    }
+
+    public List<Book> findBookByClient(Integer id){
+        return bookFeignClient.findByClientId(id);
     }
 
 }

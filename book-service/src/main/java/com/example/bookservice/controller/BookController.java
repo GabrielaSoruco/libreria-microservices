@@ -40,4 +40,9 @@ public class BookController {
     public String deleteBook(@PathVariable Integer id){
         return bookService.deleteBook(id);
     }
+
+    @GetMapping("/byClient/{id}")
+    public List<Book> findByClientId(@PathVariable Integer id){
+        return bookService.findByClientId(id);
+    }
 }
