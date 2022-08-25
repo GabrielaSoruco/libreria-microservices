@@ -1,6 +1,7 @@
 package com.example.clientservice.service;
 
 import com.example.clientservice.entity.Client;
+import com.example.clientservice.exceptions.DataNotFound;
 import com.example.clientservice.feignclients.BookFeignClient;
 import com.example.clientservice.feignclients.LaptopFeignClient;
 import com.example.clientservice.model.Book;
@@ -9,9 +10,7 @@ import com.example.clientservice.repository.ClientRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class ClientService {
@@ -58,14 +57,6 @@ public class ClientService {
         return "Client not found";
     }
 
-    public Laptop saveLaptopByClient(Laptop laptop){
-        return laptopFeignClient.saveLaptop(laptop);
-    }
-
-    public List<Laptop> findLaptopByClient(Integer id){
-        return laptopFeignClient.findByClientId(id);
-    }
-
     public Book saveBookByClient(Book book){
         return bookFeignClient.saveBook(book);
     }
@@ -74,4 +65,25 @@ public class ClientService {
         return bookFeignClient.findByClientId(id);
     }
 
+    public Laptop saveLaptopByClient(Laptop laptop){
+        return laptopFeignClient.saveLaptop(laptop);
+    }
+
+    public List<Laptop> findLaptopByClient(Integer id){
+        return laptopFeignClient.findByClientId(id);
+    }
+
+    public Map<String, Object> findProductsByClient(Integer id){
+        Map<String, Object> clientProducts = new HashMap<>();
+        Optional<Client> client = clientRepository.findById(id);
+        if (client.isPresent()){
+            List<Book> books = bookFeignClient.findByClientId(id);
+            List<Laptop> laptops = laptopFeignClient.findByClientId(id);
+            clientProducts.put("Client", client);
+            clientProducts.put("Books", books);
+            clientProducts.put("Laptops", laptops);
+            return clientProducts;
+        }
+        throw new DataNotFound("Client not found id: " + id);
+    }
 }

@@ -7,6 +7,7 @@ import com.example.clientservice.service.ClientService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/clients")
@@ -61,5 +62,10 @@ public class ClientController {
     @GetMapping("/findBookByClient/{id}")
     public List<Book> findBookByClient(@PathVariable Integer id){
         return clientService.findBookByClient(id);
+    }
+
+    @GetMapping("/findProductsByClient/{id}")
+    public Map<String, Object> findProductsByClient(@PathVariable Integer id){
+        return clientService.findProductsByClient(id);
     }
 }
