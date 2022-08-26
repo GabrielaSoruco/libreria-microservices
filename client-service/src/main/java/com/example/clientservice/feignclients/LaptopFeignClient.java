@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@FeignClient(name = "laptop-service")
+@FeignClient(name = "laptop-service", path = "/laptops")
 public interface LaptopFeignClient {
 
     @PostMapping
