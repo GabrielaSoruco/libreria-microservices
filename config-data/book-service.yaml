@@ -8,11 +8,13 @@ spring:
   application:
     name: book-service
 
+
 eureka:
   client:
-    serviceUrl:
-      defaultZone: http://localhost:8761/eureka
-      fetch-registry: true
-      register-with-eureka: true
-  instance:
-    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      default-zone: http://localhost:8761/eureka
+    instance:
+      instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+
