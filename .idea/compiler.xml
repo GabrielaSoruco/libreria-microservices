@@ -11,6 +11,7 @@
         <module name="laptop-service" />
         <module name="config-service" />
         <module name="book-service" />
+        <module name="gateway-service" />
         <module name="client-service" />
       </profile>
     </annotationProcessing>
@@ -19,6 +20,7 @@
       <module name="client-service" target="11" />
       <module name="config-service" target="11" />
       <module name="eureka-service" target="11" />
+      <module name="gateway-service" target="11" />
       <module name="laptop-service" target="11" />
     </bytecodeTargetLevel>
   </component>
@@ -28,6 +30,7 @@
       <module name="client-service" options="-parameters" />
       <module name="config-service" options="-parameters" />
       <module name="eureka-service" options="-parameters" />
+      <module name="gateway-service" options="-parameters" />
       <module name="laptop-service" options="-parameters" />
     </option>
   </component>
